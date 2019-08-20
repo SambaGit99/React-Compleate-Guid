@@ -10,13 +10,22 @@ import Person from './Person/Person'
      ]
    }
 
-   swithNameHandler = () => {
+   swithNameHandler = (inpName) => {
      //console.log('this is click event');
      //Dont do this:this.state.persons[0].name = 'Max million'
      this.setState({
       persons:[
-        {name:"samba", age:40},
+        {name:inpName, age:40},
         {name:"shiva", age:44},
+      ]
+     })
+   }
+
+   onChangeHandler = (event) => {
+    this.setState({
+      persons:[
+        {name:"Narayana", age:40},
+        {name:event.target.value, age:44},
       ]
      })
    }
@@ -25,9 +34,19 @@ import Person from './Person/Person'
     return (
       <div className="App">
         <h1> this is react snippet</h1>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My hobbies are reading</Person>
-        <button onClick={this.swithNameHandler}>SwithName</button>
+        <Person 
+        name={this.state.persons[0].name} 
+        age={this.state.persons[0].age}
+        click = {this.swithNameHandler}
+        />
+
+        <Person
+         name={this.state.persons[1].name} 
+         age={this.state.persons[1].age}
+         change={this.onChangeHandler}
+         >My hobbies are reading</Person>
+
+        <button onClick={this.swithNameHandler.bind(this, 'sambashivarao')}>SwithName</button>
       </div>
     )
   }
